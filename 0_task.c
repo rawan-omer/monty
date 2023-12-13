@@ -50,3 +50,27 @@ void pall_stack(stack_t **stack, unsigned int line_num)
 		current_node = current_node->next;
 	}
 }
+
+void pop_stack()
+{
+
+}
+/**
+ * add_top - adds the top two elements of the stack.
+ * @stack: stack pointer
+ * @line_num: number of line
+ */
+void add_top(stack_t **stack, unsigned int line_num)
+{
+	stack_t *t = *stack;
+
+	if (t == NULL || (*stack)->prev == NULL)
+	{
+		fprintf(stderr, "L%u: can't add, stack too short\n", line_num);
+		exit(EXIT_FAILURE);
+	}
+	(t->prev)->n = t->n + (t->prev)->n;
+	pop_stack(stack, line_num);
+}
+
+
