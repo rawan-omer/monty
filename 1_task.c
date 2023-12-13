@@ -1,3 +1,4 @@
+#include "monty.h"
 
 /**
  * pint -  prints the top of the stack
@@ -5,7 +6,7 @@
  * @num: integer in the structure
  * Return: void
  **/
-void pint(stack_t **stack, unsigned int num)
+void print(stack_t **stack, unsigned int num)
 {
 	stack_t *t = *stack;
 
@@ -13,7 +14,10 @@ void pint(stack_t **stack, unsigned int num)
 	if (t)
 		printf("%d\n", t->n);
 	else
-		error2(num);
+	{
+		fprintf(stderr, "L%u: can't pint, stack empty\n", num);
+		exit(EXIT_FAILURE);
+	}
 }
 
 /**
@@ -27,7 +31,11 @@ void swap(stack_t **stack, unsigned int num)
 	int i;
 
 	if (!(*stack) || !((*stack)->prev))
-	error3(num);
+	{
+		fprintf(stderr, "L%u: can't swap, stack too short\n", num);
+		exit(EXIT_FAILURE);
+	}
+
 
 	i = (*stack)->n;
 	(*stack)->n = (*stack)->prev->n;
