@@ -1,11 +1,11 @@
 #include "monty.h"
 
 /**
- * push_stack - push an element to the stack
+ * push - push an element to the stack
  * @stack: stack pointer
  * @line_num: number of line
  */
-void push_stack(stack_t **stack, unsigned int line_num)
+void push(stack_t **stack, unsigned int line_num)
 {
 	int data;
 	stack_t *new;
@@ -34,11 +34,11 @@ void push_stack(stack_t **stack, unsigned int line_num)
 }
 
 /**
- * pall_stack - print stack elements
+ * pall - print stack elements
  * @stack: stack pointer
  * @line_num: number of line
  */
-void pall_stack(stack_t **stack, unsigned int line_num)
+void pall(stack_t **stack, unsigned int line_num)
 {
 	stack_t *current_node = *stack;
 
@@ -52,11 +52,11 @@ void pall_stack(stack_t **stack, unsigned int line_num)
 }
 
 /**
- * pop_stack - removes the top element
+ * pop - removes the top element
  * @stack: stack pointer
  * @line_num: number of line
  */
-void pop_stack(stack_t **stack, unsigned int line_num)
+void pop(stack_t **stack, unsigned int line_num)
 {
 	(void) line_num;
 	if (*stack == NULL)
@@ -70,11 +70,11 @@ void pop_stack(stack_t **stack, unsigned int line_num)
 	free(top);
 }
 /**
- * add_top - adds the top two elements of the stack.
+ * add - adds the top two elements of the stack.
  * @stack: stack pointer
  * @line_num: number of line
  */
-void add_top(stack_t **stack, unsigned int line_num)
+void add(stack_t **stack, unsigned int line_num)
 {
 	stack_t *t = *stack;
 

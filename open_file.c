@@ -7,7 +7,8 @@
 void exe_file(const char *fname)
 {
 	FILE *file = fopen(fname, "r");
-	if (file == NULL) 
+
+	if (file == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", fname);
 		exit(EXIT_FAILURE);
@@ -20,9 +21,10 @@ void exe_file(const char *fname)
 	while (getline(&line, &len, file) != -1)
 	{
 		char *opcode = strtok(line, " \t\n");
+
 		if (opcode != NULL && opcode[0] != '#')
 		{
-			for (; i < sizeof(instructions) / 
+			for (; i < sizeof(instructions) /
 			sizeof(instruction_t); i++)
 				if (strcmp(opcode, instructions[i].opcode) == 0)
 				{

@@ -7,13 +7,13 @@
  **/
 void pint(stack_t **stack, unsigned int num)
 {
-        stack_t *t = *stack;
+	stack_t *t = *stack;
 
-        (void)num;
-        if (t)
-                printf("%d\n", t->n);
-        else
-                error2(num);
+	(void)num;
+	if (t)
+		printf("%d\n", t->n);
+	else
+		error2(num);
 }
 
 /**
