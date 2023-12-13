@@ -9,7 +9,9 @@
 int main(int argc, char **argv)
 {
 	if (argc != 2)
-	error1();
-	open(argv);
+	{
+		fprintf(stderr, "Usage: %s <file>\n", argv[0])
+	}
+	exe_file(argv[1]);
 	return (0);
 }

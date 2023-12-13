@@ -51,9 +51,23 @@ void pall_stack(stack_t **stack, unsigned int line_num)
 	}
 }
 
-void pop_stack()
+/**
+ * pop_stack - removes the top element
+ * @stack: stack pointer
+ * @line_num: number of line
+ */
+void pop_stack(stack_t **stack, unsigned int line_num)
 {
+	(void) line_num;
+	if (*stack == NULL)
+	{
+		fprintf(stderr, "L%d: can't pop an empty stack\n", line_num);
+		exit(EXIT_FAILURE);
+	}
+	stack_t *top = *stack;
+	*stack = top->next;
 
+	free(top);
 }
 /**
  * add_top - adds the top two elements of the stack.
@@ -73,4 +87,18 @@ void add_top(stack_t **stack, unsigned int line_num)
 	pop_stack(stack, line_num);
 }
 
+/**
+ * free_stack - free stack
+ * @stack: stack pointer
+ */
+void free_stack(stack_t *stack)
+{
+	stack_t *current = stack, *next;
 
+	while (current != NULL)
+	{
+		next = current->next;
+		free(current);
+		current = next;
+	}
+}

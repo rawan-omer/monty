@@ -6,6 +6,7 @@
 #include <ctype.h>
 #include <string.h>
 
+export int top;
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -41,5 +42,7 @@ void push_stack(stack_t **stack, unsigned int line_num);
 void pall_stack(stack_t **stack, unsigned int line_num);
 void pop_stack(stack_t **stack, unsigned int line_num);
 void add_top(stack_t **stack, unsigned int line_num);
+void exe_file(const char *fname);
+void free_stack(stack_t *stack);
 
 #endif
