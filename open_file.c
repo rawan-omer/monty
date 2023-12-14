@@ -49,12 +49,12 @@ void exe_file(const char *fname)
 }
 
 /**
- * get_opcode - retrieves the function pointer with a given opcode
+ * opcodeFunc - retrieves the function pointer with a given opcode
  * @op: the codes
  * @line: line to read
  * Return: void  or null
  */
-void (*get_opcode(char *op, unsigned int line))(stack_t **, unsigned int)
+void (*opcodeFunc(char *op, unsigned int line))(stack_t **, unsigned int)
 {
 	int i = 0;
 	char **tokens = NULL;

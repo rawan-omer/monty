@@ -39,7 +39,7 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-void (*get_opcode(char *opcode, unsigned int line))(stack_t **, unsigned int);
+void (*opcodeFunc(char *opcode, unsigned int line))(stack_t **, unsigned int);
 char **splitStrings(char *s, char *d);
 int count_words(char *str);
 void push(stack_t **stack, unsigned int line_num);
