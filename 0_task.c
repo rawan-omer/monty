@@ -10,6 +10,7 @@ void push(stack_t **stack, unsigned int line_num)
 	stack_t *new;
 	char *data_str;
 	int data = 0;
+	size_t i;
 
 	if (*stack == NULL)
 	{
@@ -22,6 +23,16 @@ void push(stack_t **stack, unsigned int line_num)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_num);
 		exit(EXIT_FAILURE);
+	}
+
+
+	for (i = 0; i < strlen(data_str); i++)
+	{
+	        if (!isdigit(data_str[i]) && data_str[i] != '-')
+        	{
+            		fprintf(stderr, "L%d: usage: push integer\n", line_num);
+            		exit(EXIT_FAILURE);
+        	}
 	}
 
 	data = atoi(data_str);
@@ -89,7 +100,7 @@ void add(stack_t **stack, unsigned int line_num)
 {
 	stack_t *t = *stack;
 
-	if (t == NULL || (*stack)->prev == NULL)
+	if (*stack == NULL || (*stack)->next == NULL)
 	{
 		fprintf(stderr, "L%u: can't add, stack too short\n", line_num);
 		exit(EXIT_FAILURE);

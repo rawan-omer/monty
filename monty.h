@@ -7,7 +7,8 @@
 #include <ctype.h>
 #include <string.h>
 
-int data;
+extern int data;
+int r;
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)

@@ -17,11 +17,14 @@ void exe_file(const char *fname)
 		fprintf(stderr, "Error: Can't open file %s\n", fname);
 		exit(EXIT_FAILURE);
 	}
+
+
 	while (getline(&line, &len, file) != -1)
 	{
 		char *opcode = strtok(line, " \t\n");
 
-		if (opcode != NULL && opcode[0] != '#')
+
+		if (opcode != NULL && opcode[0] != '#' && *opcode != '\0')
 		{
 			int found = 0;
 
@@ -29,11 +32,13 @@ void exe_file(const char *fname)
 			{
 				if (strcmp(opcode, instructions[i].opcode) == 0)
 				{
+
 					instructions[i].f(&stack, line_num);
 					found = 1;
 					break;
 				}
 			}
+
 			if (!found)
 			{
 				fprintf(stderr, "L%u: unknown instruction %s\n", line_num, opcode);
@@ -61,17 +66,19 @@ void (*opcodeFunc(char *op, unsigned int line))(stack_t **, unsigned int)
 
 	tokens = splitStrings(op, "\n\t\r ");
 
-	if (tokens[1])
-	data = atoi(tokens[1]);
+	if (tokens && tokens[1])
+		r = atoi(tokens[1]);
 
 	for (i = 0; instructions[i].opcode != NULL; i++)
 	{
-	if (strcmp(op, instructions[i].opcode) == 0)
-	{
+		if (strcmp(op, instructions[i].opcode) == 0)
+		{
+			free(tokens);
+			return (instructions[i].f);
+		}
+	}
+
 	free(tokens);
-	return (instructions[i].f);
-	}
-	}
 	(void)line;
 	return (NULL);
 }
@@ -94,7 +101,6 @@ char **splitStrings(char *s, char *d)
 	{
 	fprintf(stderr, "Error: malloc failed\n");
 	exit(EXIT_FAILURE);
-	return (NULL);
 	}
 
 	splited_words[0] = strtok(s, d);
@@ -102,16 +108,13 @@ char **splitStrings(char *s, char *d)
 	if (splited_words[0] == NULL)
 	{
 	fprintf(stderr, "Error: malloc failed\n");
-	exit(EXIT_FAILURE);
-	free(splited_words[0]);
 	free(splited_words);
-	return (NULL);
+	exit(EXIT_FAILURE);
 	}
 
 	for (i = 1; i < cword; i++)
-	{
-	splited_words[i] = strtok(NULL, d);
-	}
+		splited_words[i] = strtok(NULL, d);
+
 	return (splited_words);
 }
 
@@ -127,7 +130,7 @@ char **splitStrings(char *s, char *d)
 int count_words(char *str)
 {
 	int state = OUT;
-	unsigned int wc = 0;
+	unsigned int i = 0;
 
 	while (*str)
 	{
@@ -137,9 +140,9 @@ int count_words(char *str)
 	else if (state == OUT)
 	{
 	state = IN;
-	++wc;
+	++i;
 	}
 	++str;
 	}
-	return (wc);
+	return (i);
 }

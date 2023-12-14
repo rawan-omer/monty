@@ -13,6 +13,8 @@ int main(int argc, char **argv)
 		fprintf(stderr, "Usage: %s <file>\n", argv[0]);
 		exit(EXIT_FAILURE);
 	}
+
 	exe_file(argv[1]);
-	return (0);
+
+	return EXIT_SUCCESS;
 }
