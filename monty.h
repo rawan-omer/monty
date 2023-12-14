@@ -1,12 +1,11 @@
 #ifndef MONTY_H
 #define MONTY_H
 
+#define _POSIX_C_SOURCE 200809
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
-
-export int top;
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -47,5 +46,14 @@ void free_stack(stack_t *stack);
 void pint(stack_t **stack, unsigned int num);
 void swap(stack_t **stack, unsigned int num);
 void nop(stack_t **stack, unsigned int num);
+
+/*
+ * The instructions array serves as a mapping between Monty bytecode opcodes
+ * and their corresponding implementation functions. It is defined as static
+ * to limit its scope to the instructions.c file
+ * This design choice is made for the sake of clarity and maintainability,
+ * ensuring that opcode mappings are contained within a dedicated module.
+ */
+extern instruction_t instructions[];
 
 #endif

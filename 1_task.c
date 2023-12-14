@@ -6,7 +6,7 @@
  * @num: integer in the structure
  * Return: void
  **/
-void print(stack_t **stack, unsigned int num)
+void pint(stack_t **stack, unsigned int num)
 {
 	stack_t *t = *stack;
 

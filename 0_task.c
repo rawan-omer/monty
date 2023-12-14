@@ -9,14 +9,20 @@ void push(stack_t **stack, unsigned int line_num)
 {
 	int data;
 	stack_t *new;
+	char *data_str;
 
 	if (*stack == NULL)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_num);
 		exit(EXIT_FAILURE);
 	}
-
-	data = atoi((*stack)->opcode);
+	data_str = strtok(NULL, " \t\n");
+	if (data_str == NULL)
+	{
+		fprintf(stderr, "L%d: usage: push integer\n", line_num);
+		exit(EXIT_FAILURE);
+	}
+	data = atoi(data_str);
 	new = malloc(sizeof(stack_t));
 	if (new == NULL)
 	{
@@ -30,7 +36,7 @@ void push(stack_t **stack, unsigned int line_num)
 
 	if (*stack != NULL)
 		(*stack)->prev = new;
-	*stack = new_node;
+	*stack = new;
 }
 
 /**
@@ -58,13 +64,15 @@ void pall(stack_t **stack, unsigned int line_num)
  */
 void pop(stack_t **stack, unsigned int line_num)
 {
+	stack_t *top;
+
 	(void) line_num;
 	if (*stack == NULL)
 	{
 		fprintf(stderr, "L%d: can't pop an empty stack\n", line_num);
 		exit(EXIT_FAILURE);
 	}
-	stack_t *top = *stack;
+	top = *stack;
 	*stack = top->next;
 
 	free(top);
@@ -84,7 +92,7 @@ void add(stack_t **stack, unsigned int line_num)
 		exit(EXIT_FAILURE);
 	}
 	(t->prev)->n = t->n + (t->prev)->n;
-	pop_stack(stack, line_num);
+	pop(stack, line_num);
 }
 
 /**
