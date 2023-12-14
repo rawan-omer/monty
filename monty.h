@@ -49,7 +49,7 @@ void swap(stack_t **stack, unsigned int num);
 void nop(stack_t **stack, unsigned int num);
 
 
-static const instruction_t instruct[] = {
+static const instruction_t instructions[] = {
 	{"push", push},
 	{"pall", pall},
 	{"pop", pop},
