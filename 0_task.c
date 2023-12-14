@@ -16,13 +16,16 @@ void push(stack_t **stack, unsigned int line_num)
 		fprintf(stderr, "L%d: usage: push integer\n", line_num);
 		exit(EXIT_FAILURE);
 	}
+
 	data_str = strtok(NULL, " \t\n");
 	if (data_str == NULL)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_num);
 		exit(EXIT_FAILURE);
 	}
+
 	data = atoi(data_str);
+
 	new = malloc(sizeof(stack_t));
 	if (new == NULL)
 	{

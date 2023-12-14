@@ -7,7 +7,7 @@
 #include <ctype.h>
 #include <string.h>
 
-extern int data;
+int data;
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -39,6 +39,9 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+void (*get_opcode(char *opcode, unsigned int line))(stack_t **, unsigned int);
+char **splitStrings(char *s, char *d);
+int count_words(char *str);
 void push(stack_t **stack, unsigned int line_num);
 void pall(stack_t **stack, unsigned int line_num);
 void pop(stack_t **stack, unsigned int line_num);
