@@ -7,9 +7,9 @@
  */
 void push(stack_t **stack, unsigned int line_num)
 {
-	int data;
 	stack_t *new;
 	char *data_str;
+	int data = 0;
 
 	if (*stack == NULL)
 	{
