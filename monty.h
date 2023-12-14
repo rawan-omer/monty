@@ -47,13 +47,16 @@ void pint(stack_t **stack, unsigned int num);
 void swap(stack_t **stack, unsigned int num);
 void nop(stack_t **stack, unsigned int num);
 
-/*
- * The instructions array serves as a mapping between Monty bytecode opcodes
- * and their corresponding implementation functions. It is defined as static
- * to limit its scope to the instructions.c file
- * This design choice is made for the sake of clarity and maintainability,
- * ensuring that opcode mappings are contained within a dedicated module.
- */
-extern instruction_t instructions[];
+
+static const instruction_t instruct[] = {
+	{"push", push},
+	{"pall", pall},
+	{"pop", pop},
+	{"add", add},
+	{"pint", pint},
+	{"swap", swap},
+	{"nop", nop},
+	{NULL, NULL}
+};
 
 #endif

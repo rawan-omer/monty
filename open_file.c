@@ -1,16 +1,5 @@
 #include "monty.h"
 
-instruction_t instructions[] = {
-	{"push", push},
-	{"pall", pall},
-	{"pop", pop},
-	{"add", add},
-	{"pint", pint},
-	{"swap", swap},
-	{"nop", nop},
-	{NULL, NULL}
-};
-
 /**
  * exe_file - Opens, reads, and executes Monty bytecode file
  * @fname: monty file name
@@ -35,11 +24,11 @@ void exe_file(const char *fname)
 
 		if (opcode != NULL && opcode[0] != '#')
 		{
-			for (i = 0; i < sizeof(instructions) /
+			for (i = 0; i < sizeof(instruct) /
 					sizeof(instruction_t); i++)
-				if (strcmp(opcode, instructions[i].opcode) == 0)
+				if (strcmp(opcode, instruct[i].opcode) == 0)
 				{
-					instructions[i].f(&stack, line_num);
+					instruct[i].f(&stack, line_num);
 					break;
 				}
 		}
