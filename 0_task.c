@@ -8,34 +8,6 @@
 void push(stack_t **stack, unsigned int line_num)
 {
 	stack_t *new;
-	char *data_str;
-	int data = 0;
-	size_t i;
-
-	if (*stack == NULL)
-	{
-		fprintf(stderr, "L%d: usage: push integer\n", line_num);
-		exit(EXIT_FAILURE);
-	}
-
-	data_str = strtok(NULL, " \t\n");
-	if (data_str == NULL)
-	{
-		fprintf(stderr, "L%d: usage: push integer\n", line_num);
-		exit(EXIT_FAILURE);
-	}
-
-
-	for (i = 0; i < strlen(data_str); i++)
-	{
-	        if (!isdigit(data_str[i]) && data_str[i] != '-')
-        	{
-            		fprintf(stderr, "L%d: usage: push integer\n", line_num);
-            		exit(EXIT_FAILURE);
-        	}
-	}
-
-	data = atoi(data_str);
 
 	new = malloc(sizeof(stack_t));
 	if (new == NULL)
@@ -44,13 +16,21 @@ void push(stack_t **stack, unsigned int line_num)
 		exit(EXIT_FAILURE);
 	}
 
-	new->n = data;
+	new->n = r;
+	new->next = NULL;
 	new->prev = NULL;
-	new->next = *stack;
 
-	if (*stack != NULL)
-		(*stack)->prev = new;
-	*stack = new;
+	if (*stack == NULL)
+	{
+		*stack = new;
+	}
+	else
+	{
+		(*stack)->next = new;
+		new->prev = *stack;
+		*stack = new;
+	}
+	(void)line_num;
 }
 
 /**
@@ -113,9 +93,9 @@ void add(stack_t **stack, unsigned int line_num)
  * free_stack - free stack
  * @stack: stack pointer
  */
-void free_stack(stack_t *stack)
+void free_stack(stack_t **stack)
 {
-	stack_t *current = stack, *next;
+	stack_t *current = *stack, *next;
 
 	while (current != NULL)
 	{
@@ -123,4 +103,5 @@ void free_stack(stack_t *stack)
 		free(current);
 		current = next;
 	}
+	*stack = NULL;
 }
