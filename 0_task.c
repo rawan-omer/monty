@@ -1,4 +1,44 @@
 #include "monty.h"
+
+/**
+ * execute - open, read and execute the files
+ * @argv: arguments to push
+ * Return: void
+ **/
+void execute(char **argv)
+{
+	FILE *file = NULL;
+	char *tmp = NULL, *var = NULL;
+	size_t i = 0;
+	int n = 1;
+	stack_t *stack = NULL;
+	void (*f)(stack_t **stack, unsigned int line_num);
+
+	file = fopen(argv[1], "r");
+	if (!file)
+	{
+		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
+		exit(EXIT_FAILURE);
+	}
+
+	for (n = 1; getline(&tmp, &i, file) != -1; n++)
+	{
+	f = opcodeFunc(tmp, n);
+	if (!f)
+	{
+	fprintf(stderr, "L%d: unknown instruction %s\n", n, strtok(tmp, " "));
+	exit(EXIT_FAILURE);
+	}
+	else
+	f(&stack, n);
+	}
+
+	fclose(file);
+	free(tmp);
+	free_stack(&stack);
+	(void)var;
+}
+
 /**
  * push - push an element to the stack
  * @stack: stack pointer
@@ -7,44 +47,19 @@
 void push(stack_t **stack, unsigned int line_num)
 {
 	stack_t *new;
-	char *data_str;
-	int data = 0;
-	size_t i;
-
-	if (*stack == NULL)
-	{
-		fprintf(stderr, "L%d: usage: push integer\n", line_num);
-		exit(EXIT_FAILURE);
-	}
-
-	data_str = strtok(NULL, " \t\n");
-	if (data_str == NULL)
-	{
-		fprintf(stderr, "L%d: usage: push integer\n", line_num);
-		exit(EXIT_FAILURE);
-	}
-	for (i = 0; i < strlen(data_str); i++)
-	{
-		if (!isdigit(data_str[i]) && data_str[i] != '-')
-		{
-			fprintf(stderr, "L%d: usage: push integer\n", line_num);
-			exit(EXIT_FAILURE);
-		}
-	}
-	data = atoi(data_str);
 
 	new = malloc(sizeof(stack_t));
-	if (new == NULL)
+	if (!new)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
 
-	new->n = data;
+	new->n = r;
 	new->prev = NULL;
 	new->next = *stack;
 
-	if (*stack != NULL)
+	if (*stack)
 		(*stack)->prev = new;
 
 	*stack = new;

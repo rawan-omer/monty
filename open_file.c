@@ -10,9 +10,7 @@ int r;
 void (*opcodeFunc(char *op, unsigned int line))(stack_t **, unsigned int)
 {
 	int i = 0;
-	char **tokens = NULL;
-
-	tokens = splitStrings(op, "\n\t\r ");
+	char **tokens = splitStrings(op, " \n\t");
 
 	if (tokens && tokens[1])
 		r = atoi(tokens[1]);
@@ -45,7 +43,7 @@ char **splitStrings(char *s, char *d)
 	cword = count_words(s);
 
 	splited_words = malloc(sizeof(char *) * (cword + 1));
-	if (splited_words == NULL)
+	if (!(splited_words))
 	{
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
@@ -53,7 +51,7 @@ char **splitStrings(char *s, char *d)
 
 	splited_words[0] = strtok(s, d);
 
-	if (splited_words[0] == NULL)
+	if (!(splited_words[0]))
 	{
 		fprintf(stderr, "Error: malloc failed\n");
 		free(splited_words);
