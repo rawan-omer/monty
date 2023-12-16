@@ -52,6 +52,8 @@ void free_stack(stack_t *stack);
 void pint(stack_t **stack, unsigned int num);
 void swap(stack_t **stack, unsigned int num);
 void nop(stack_t **stack, unsigned int num);
+void sub(stack_t **stack, unsigned int num);
+void mul(stack_t **stack, unsigned int num);
 
 
 static const instruction_t instructions[] = {

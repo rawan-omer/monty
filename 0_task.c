@@ -1,5 +1,4 @@
 #include "monty.h"
-
 /**
  * push - push an element to the stack
  * @stack: stack pointer
@@ -24,35 +23,28 @@ void push(stack_t **stack, unsigned int line_num)
 		fprintf(stderr, "L%d: usage: push integer\n", line_num);
 		exit(EXIT_FAILURE);
 	}
-
-
 	for (i = 0; i < strlen(data_str); i++)
 	{
-	        if (!isdigit(data_str[i]) && data_str[i] != '-')
-        	{
-            		fprintf(stderr, "L%d: usage: push integer\n", line_num);
-            		exit(EXIT_FAILURE);
-        	}
+		if (!isdigit(data_str[i]) && data_str[i] != '-')
+		{
+			fprintf(stderr, "L%d: usage: push integer\n", line_num);
+			exit(EXIT_FAILURE);
+		}
 	}
-
 	data = atoi(data_str);
-
 	new = malloc(sizeof(stack_t));
 	if (new == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
-
 	new->n = data;
 	new->prev = NULL;
 	new->next = *stack;
-
 	if (*stack != NULL)
 		(*stack)->prev = new;
 	*stack = new;
 }
-
 /**
  * pall - print stack elements
  * @stack: stack pointer
@@ -70,7 +62,6 @@ void pall(stack_t **stack, unsigned int line_num)
 		current_node = current_node->next;
 	}
 }
-
 /**
  * pop - removes the top element
  * @stack: stack pointer
@@ -88,7 +79,8 @@ void pop(stack_t **stack, unsigned int line_num)
 	}
 	top = *stack;
 	*stack = top->next;
-
+	if (*stack != NULL)
+		(*stack)->prev = NULL;
 	free(top);
 }
 /**
@@ -105,10 +97,15 @@ void add(stack_t **stack, unsigned int line_num)
 		fprintf(stderr, "L%u: can't add, stack too short\n", line_num);
 		exit(EXIT_FAILURE);
 	}
+	if ((t->n > 0 && (INT_MAX - t->n) < (t->prev)->n) ||
+	(t->n < 0 && (INT_MIN - t->n) > (t->prev)->n))
+	{
+		fprintf(stderr, "L%u: integer overflow during addition\n", line_num);
+		exit(EXIT_FAILURE);
+	}
 	(t->prev)->n = t->n + (t->prev)->n;
 	pop(stack, line_num);
 }
-
 /**
  * free_stack - free stack
  * @stack: stack pointer

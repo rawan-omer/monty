@@ -16,7 +16,6 @@ void pint(stack_t **stack, unsigned int num)
 	else
 	{
 		fprintf(stderr, "L%u: can't pint, stack empty\n", num);
-		exit(EXIT_FAILURE);
 	}
 }
 
@@ -28,7 +27,7 @@ void pint(stack_t **stack, unsigned int num)
  **/
 void swap(stack_t **stack, unsigned int num)
 {
-	int i;
+	int tmp;
 
 	if (!(*stack) || !((*stack)->prev))
 	{
@@ -36,10 +35,9 @@ void swap(stack_t **stack, unsigned int num)
 		exit(EXIT_FAILURE);
 	}
 
-
-	i = (*stack)->n;
+	tmp = (*stack)->n;
 	(*stack)->n = (*stack)->prev->n;
-	(*stack)->prev->n = i;
+	(*stack)->prev->n = tmp;
 
 	(void)num;
 }
