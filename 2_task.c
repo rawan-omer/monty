@@ -11,7 +11,7 @@ void sub(stack_t **stack, unsigned int num)
 
         if (*stack == NULL || (*stack)->prev == NULL)
         {
-                fprintf(stderr, "L%u: can't sub, stack too short\n", line);
+                fprintf(stderr, "L%u: can't sub, stack too short\n", num);
                 exit(EXIT_FAILURE);
         }
 
@@ -30,7 +30,7 @@ void mul(stack_t **stack, unsigned int num)
 
         if (*stack == NULL || (*stack)->prev == NULL)
         {
-                fprintf(stderr, "L%u: can't mul, stack too short\n", line);
+                fprintf(stderr, "L%u: can't mul, stack too short\n", num);
                 exit(EXIT_FAILURE);
         }
         (top->prev)->n = (top->prev)->n * top->n;

@@ -7,7 +7,6 @@
 void push(stack_t **stack, unsigned int line_num)
 {
 	stack_t *new;
-<<<<<<< HEAD
 	char *data_str;
 	int data = 0;
 	size_t i;
@@ -33,40 +32,23 @@ void push(stack_t **stack, unsigned int line_num)
 		}
 	}
 	data = atoi(data_str);
-=======
 
->>>>>>> e1b389d3d1bbf4efe206094d0a9620f130db96ba
 	new = malloc(sizeof(stack_t));
 	if (new == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
-<<<<<<< HEAD
+
 	new->n = data;
 	new->prev = NULL;
 	new->next = *stack;
+
 	if (*stack != NULL)
 		(*stack)->prev = new;
+
 	*stack = new;
-=======
-
-	new->n = r;
-	new->next = NULL;
-	new->prev = NULL;
-
-	if (*stack == NULL)
-	{
-		*stack = new;
-	}
-	else
-	{
-		(*stack)->next = new;
-		new->prev = *stack;
-		*stack = new;
-	}
 	(void)line_num;
->>>>>>> e1b389d3d1bbf4efe206094d0a9620f130db96ba
 }
 /**
  * pall - print stack elements
@@ -120,12 +102,7 @@ void add(stack_t **stack, unsigned int line_num)
 		fprintf(stderr, "L%u: can't add, stack too short\n", line_num);
 		exit(EXIT_FAILURE);
 	}
-	if ((t->n > 0 && (INT_MAX - t->n) < (t->prev)->n) ||
-	(t->n < 0 && (INT_MIN - t->n) > (t->prev)->n))
-	{
-		fprintf(stderr, "L%u: integer overflow during addition\n", line_num);
-		exit(EXIT_FAILURE);
-	}
+
 	(t->prev)->n = t->n + (t->prev)->n;
 	pop(stack, line_num);
 }

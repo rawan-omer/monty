@@ -63,6 +63,8 @@ static const instruction_t instructions[] = {
 	{"pint", pint},
 	{"swap", swap},
 	{"nop", nop},
+	{"sub", sub},
+	{"mul", mul},
 	{NULL, NULL}
 };
 
