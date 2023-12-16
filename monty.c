@@ -14,7 +14,7 @@ int main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 
-	exe_file(argv[1]);
+	exe_file(argv);
 
-	return EXIT_SUCCESS;
+	return (EXIT_SUCCESS);
 }
