@@ -53,7 +53,8 @@ void swap(stack_t **stack, unsigned int num);
 void nop(stack_t **stack, unsigned int num);
 void sub(stack_t **stack, unsigned int num);
 void mul(stack_t **stack, unsigned int num);
-
+void divi(stack_t **stack, unsigned int num);
+void mod(stack_t **stack, unsigned int num);
 
 static const instruction_t instructions[] = {
 	{"push", push},
@@ -65,6 +66,8 @@ static const instruction_t instructions[] = {
 	{"nop", nop},
 	{"sub", sub},
 	{"mul", mul},
+	{"div", divi},
+	{"mod", mod},
 	{NULL, NULL}
 };
 
