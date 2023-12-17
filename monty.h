@@ -57,6 +57,10 @@ void sub(stack_t **stack, unsigned int num);
 void mul(stack_t **stack, unsigned int num);
 void divi(stack_t **stack, unsigned int num);
 void mod(stack_t **stack, unsigned int num);
+void rotl(stack_t **stack, unsigned int line_num);
+void pstr(stack_t **stack, unsigned int line_num);
+void pchar(stack_t **stack, unsigned int line_num);
+int comment(char *l);
 
 static const instruction_t instructions[] = {
 	{"push", push},
@@ -70,6 +74,9 @@ static const instruction_t instructions[] = {
 	{"mul", mul},
 	{"div", divi},
 	{"mod", mod},
+	{"pchar", pchar},
+	{"pstr", pstr},
+	{"rotl", rotl},
 	{NULL, NULL}
 };
 
