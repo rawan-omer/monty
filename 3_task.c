@@ -81,3 +81,30 @@ int comment(char *l)
 	}
 	return 0;
 }
+
+/**
+ * rotr - rotates the stack to the bottom
+ * @stack: the head of stack
+ * @line_num: the line number
+ */
+void rotr(stack_t **stack, unsigned int line_num)
+{
+	stack_t *end;
+
+	if (*stack && (*stack)->next)
+	{
+		end = *stack;
+		while (end->next)
+		{
+			end = end->next;
+		}
+
+		end->prev->next = NULL;
+		end->prev = NULL;
+		end->next = *stack;
+		(*stack)->prev = end;
+
+		*stack = end;
+	}
+	(void)line_num;
+}

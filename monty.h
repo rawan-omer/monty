@@ -61,6 +61,9 @@ void rotl(stack_t **stack, unsigned int line_num);
 void pstr(stack_t **stack, unsigned int line_num);
 void pchar(stack_t **stack, unsigned int line_num);
 int comment(char *l);
+void rotr(stack_t **stack, unsigned int line_num);
+void stack(stack_t **stack, unsigned int line_num);
+void queue(stack_t **stack, unsigned int line_num);
 
 static const instruction_t instructions[] = {
 	{"push", push},
@@ -77,6 +80,9 @@ static const instruction_t instructions[] = {
 	{"pchar", pchar},
 	{"pstr", pstr},
 	{"rotl", rotl},
+	{"rotr", rotr},
+	{"queue", queue},
+	{"stack", stack},
 	{NULL, NULL}
 };
 

@@ -110,6 +110,7 @@ void pop(stack_t **stack, unsigned int line_num)
 void add(stack_t **stack, unsigned int line_num)
 {
 	stack_t *t = *stack;
+	stack_t *second = t->next;
 
 	if (*stack == NULL || (*stack)->next == NULL)
 	{
@@ -117,7 +118,7 @@ void add(stack_t **stack, unsigned int line_num)
 		exit(EXIT_FAILURE);
 	}
 
-	(t->prev)->n = t->n + (t->prev)->n;
+	second->n += t->n;
 	pop(stack, line_num);
 }
 /**
