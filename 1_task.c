@@ -1,5 +1,5 @@
 #include "monty.h"
- 
+
 /**
  * pint -  print top of stack
  * @stack: head of stack

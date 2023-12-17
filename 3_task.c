@@ -3,7 +3,7 @@
 /**
  * pchar - print the top char in stack
  * @stack: head of stack
- * @line_num: the line number 
+ * @line_num: the line number
  */
 void pchar(stack_t **stack, unsigned int line_num)
 {
@@ -25,7 +25,7 @@ void pchar(stack_t **stack, unsigned int line_num)
 /**
  * pstr - print string from top of the stack
  * @stack: head of stack
- * @line_number: the line number
+ * @line_num: the line number
  */
 void pstr(stack_t **stack, unsigned int line_num)
 {
@@ -43,7 +43,7 @@ void pstr(stack_t **stack, unsigned int line_num)
 /**
  * rotl - rotate stack
  * @stack: head of stack
- * @line_number: the line number
+ * @line_num: the line number
  */
 void rotl(stack_t **stack, unsigned int line_num)
 {
@@ -74,12 +74,12 @@ int comment(char *l)
 	while (*l)
 	{
 		if (*l == '#')
-			return 1;
+			return (1);
 		if (!isspace(*l))
-			return 0;
+			return (0);
 		l++;
 	}
-	return 0;
+	return (0);
 }
 
 /**

@@ -4,7 +4,7 @@ int r;
 /**
  * opcodeFunc - retrieves the function pointer with a given opcode
  * @op: the codes
- * @line: line to read
+ * @l: line to read
  * Return: void  or null
  */
 void (*opcodeFunc(char *op, unsigned int l))(stack_t **, unsigned int)
@@ -66,7 +66,7 @@ char **splitStrings(char *str, char *d)
 
 /**
  * count_fun - counts words based on delimiters
- * @s: input string 
+ * @s: input string
  * Return: words num in input string
  */
 
