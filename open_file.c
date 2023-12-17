@@ -7,88 +7,85 @@ int r;
  * @line: line to read
  * Return: void  or null
  */
-void (*opcodeFunc(char *op, unsigned int line))(stack_t **, unsigned int)
+void (*opcodeFunc(char *op, unsigned int l))(stack_t **, unsigned int)
 {
-	int i = 0;
-	char **tokens = splitStrings(op, " \n\t");
+	int n;
+	char **tok = splitStrings(op, " \n\t");
 
-	if (tokens && tokens[1])
-		r = atoi(tokens[1]);
+	if (tok && tok[1])
+		r = atoi(tok[1]);
 
-	for (i = 0; instructions[i].opcode != NULL; i++)
+	for (n = 0; instructions[n].opcode != NULL; n++)
 	{
-		if (strcmp(op, instructions[i].opcode) == 0)
+		if (strcmp(op, instructions[n].opcode) == 0)
 		{
-			free(tokens);
-			return (instructions[i].f);
+			free(tok);
+			return (instructions[n].f);
 		}
 	}
 
-	free(tokens);
-	(void)line;
+	free(tok);
+	(void)l;
 	return (NULL);
 }
 
 /**
- * splitStrings - Splits an input string into words
- * @s: The string to be split to words
- * @d: the delimiter
- * Return: array of strings representing the words or null
+ * splitStrings - string split function
+ * @str: input string
+ * @d: input delimiter
+ * Return: string array splited
  */
-char **splitStrings(char *s, char *d)
+char **splitStrings(char *str, char *d)
 {
-	int i = 0, cword = 0;
-	char **splited_words = NULL;
+	char **str_split = NULL;
+	int n = 0, count = 0;
 
-	cword = count_words(s);
+	count = count_fun(str);
 
-	splited_words = malloc(sizeof(char *) * (cword + 1));
-	if (!(splited_words))
+	str_split = malloc(sizeof(char *) * (count + 1));
+	if (!(str_split))
 	{
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
 
-	splited_words[0] = strtok(s, d);
+	str_split[0] = strtok(str, d);
 
-	if (!(splited_words[0]))
+	if (!(str_split[0]))
 	{
 		fprintf(stderr, "Error: malloc failed\n");
-		free(splited_words);
+		free(str_split);
 		exit(EXIT_FAILURE);
 	}
 
-	for (i = 1; i < cword; i++)
-		splited_words[i] = strtok(NULL, d);
+	for (n = 1; n < count; n++)
+		str_split[n] = strtok(NULL, d);
 
-	return (splited_words);
+	return (str_split);
 }
 
-#define OUT 0
-#define IN 1
-
 /**
- * count_words - function that counts words depending on delimiters
- * @str: string to be evaluated.
- * Return: number of words in the string.
+ * count_fun - counts words based on delimiters
+ * @s: input string 
+ * Return: words num in input string
  */
 
-int count_words(char *str)
+int count_fun(char *s)
 {
-	int state = OUT;
 	unsigned int i = 0;
+	int on_of = OUT;
 
-	while (*str)
+	while (*s)
 	{
-	if (*str == ' ' || *str == '\n' || *str == '\t' ||
-	*str == ':' || *str == '=')
-	state = OUT;
-	else if (state == OUT)
+	if (*s == ' ' || *s == '\n' || *s == '\t' ||
+	*s == ':' || *s == '=')
+	on_of = OUT;
+	else if (on_of == OUT)
 	{
-	state = IN;
+	on_of = IN;
 	++i;
 	}
-	++str;
+	++s;
 	}
 	return (i);
 }

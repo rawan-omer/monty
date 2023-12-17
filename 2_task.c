@@ -1,54 +1,51 @@
 #include "monty.h"
 
 /**
- * sub - sub top two elements in stack
- * @stack: the top element of the stack
- * @num: integer value in the structure
- * Return: void
+ * sub - sub top 2 elements in stack
+ * @stack: head of stack
+ * @num: input line number
  **/
 void sub(stack_t **stack, unsigned int num)
 {
-        stack_t *top = *stack;
+	stack_t *top = *stack;
 
-        if (*stack == NULL || (*stack)->prev == NULL)
-        {
-                fprintf(stderr, "L%u: can't sub, stack too short\n", num);
-                exit(EXIT_FAILURE);
-        }
+	if (!(*stack) || !((*stack)->prev))
+	{
+		fprintf(stderr, "L%u: can't sub, stack too short\n", num);
+		exit(EXIT_FAILURE);
+	}
 
-        (top->prev)->n = (top->prev)->n - top->n;
-        pop(stack, num);
+	(top->prev)->n = (top->prev)->n - top->n;
+	pop(stack, num);
 }
 
 /**
- * mul - mul the top two elements in stack
- * @stack: the top of the stack
- * @num: integer value in stack
- * Return: void
+ * mul - mul the top 2 elements in stack
+ * @stack: head of stack
+ * @num: input line number
  **/
 void mul(stack_t **stack, unsigned int num)
 {
-        stack_t *top = *stack;
+	stack_t *top = *stack;
 
-        if (*stack == NULL || (*stack)->prev == NULL)
-        {
-                fprintf(stderr, "L%u: can't mul, stack too short\n", num);
-                exit(EXIT_FAILURE);
-        }
-        (top->prev)->n = (top->prev)->n * top->n;
+	if (!(*stack) || !((*stack)->prev))
+	{
+		fprintf(stderr, "L%u: can't mul, stack too short\n", num);
+		exit(EXIT_FAILURE);
+	}
+	(top->prev)->n = (top->prev)->n * top->n;
 }
 
 /**
- * divi - divide the top two elements in the stack
- * @stack: element at the top of the stack (head)
- * @num: integer value in stack
- * Return: void
+ * divi - divide the top 2 elements in the stack
+ * @stack: head of stack
+ * @num: input line number
  **/
 void divi(stack_t **stack, unsigned int num)
 {
 	stack_t *r = *stack;
 
-	if (!(*stack)|| !((*stack)->prev))
+	if (!(*stack) || !((*stack)->prev))
 	{
 	fprintf(stderr, "L%u: can't div, stack too short\n", num);
 	exit(EXIT_FAILURE);
@@ -64,10 +61,9 @@ void divi(stack_t **stack, unsigned int num)
 }
 
 /**
- * mod - modify the top two elements in the stack
- * @stack: the top of the stack
- * @num: integer value in stack
- * Return: void
+ * mod - modify the top 2 elements in the stack
+ * @stack: stack head
+ * @num: input line number
  **/
 void mod(stack_t **stack, unsigned int num)
 {

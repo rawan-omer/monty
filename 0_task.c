@@ -1,23 +1,22 @@
 #include "monty.h"
 
 /**
- * execute - open, read and execute the files
- * @argv: arguments to push
- * Return: void
+ * execute - fun to open and read files
+ * @av: list of arguments
  **/
-void execute(char **argv)
+void execute(char **av)
 {
-	FILE *file = NULL;
-	char *tmp = NULL, *var = NULL;
-	size_t i = 0;
 	int n = 1;
+	FILE *file = NULL;
+	size_t i = 0;
+	char *tmp = NULL, *var = NULL;
 	stack_t *stack = NULL;
 	void (*f)(stack_t **stack, unsigned int line_num);
 
-	file = fopen(argv[1], "r");
+	file = fopen(av[1], "r");
 	if (!file)
 	{
-		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
+		fprintf(stderr, "Error: Can't open file %s\n", av[1]);
 		exit(EXIT_FAILURE);
 	}
 
@@ -104,7 +103,7 @@ void pop(stack_t **stack, unsigned int line_num)
 	free(top);
 }
 /**
- * add - adds the top two elements of the stack.
+ * add - adds top elements of stack
  * @stack: stack pointer
  * @line_num: number of line
  */

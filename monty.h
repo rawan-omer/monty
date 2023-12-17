@@ -2,6 +2,8 @@
 #define MONTY_H
 
 #define _POSIX_C_SOURCE 200809
+#define OUT 0
+#define IN 1
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
@@ -39,14 +41,14 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-void (*opcodeFunc(char *opcode, unsigned int line))(stack_t **, unsigned int);
-char **splitStrings(char *s, char *d);
-int count_words(char *str);
+void execute(char **av);
+void (*opcodeFunc(char *op, unsigned int l))(stack_t **, unsigned int);
+char **splitStrings(char *str, char *d);
+int count_fun(char *s);
 void push(stack_t **stack, unsigned int line_num);
 void pall(stack_t **stack, unsigned int line_num);
 void pop(stack_t **stack, unsigned int line_num);
 void add(stack_t **stack, unsigned int line_num);
-void exe_file(char **argv);
 void free_stack(stack_t **stack);
 void pint(stack_t **stack, unsigned int num);
 void swap(stack_t **stack, unsigned int num);

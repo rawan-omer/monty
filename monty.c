@@ -1,20 +1,20 @@
 #include "monty.h"
 
 /**
- * main - files interpreter
- * @argc: the number of arguments
- * @argv: The arguments
+ * main - entry point
+ * @ac: the number of arguments
+ * @av: list of arguments
  * Return: integer
  */
-int main(int argc, char **argv)
+int main(int ac, char **av)
 {
-	if (argc != 2)
+	if (ac != 2)
 	{
-		fprintf(stderr, "Usage: %s <file>\n", argv[0]);
+		fprintf(stderr, "Usage: %s <file>\n", av[0]);
 		exit(EXIT_FAILURE);
 	}
 
-	exe_file(argv);
+	execute(av);
 
 	return (EXIT_SUCCESS);
 }
